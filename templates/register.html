@@ -7,13 +7,13 @@
 <form style="margin-left:10px;marigin-top:10px;" method="POST">
     {% csrf_token %}
    <div class="form-group row">
-    <label  class="col-sm-2 col-form-label">{{form.firstname.label}}</label>
+    <label  class="col-sm-2 col-form-label">{{form.first_name.label}}</label>
     <div class="col-sm-5">
       {{form.first_name}}
     </div>
   </div>
    <div class="form-group row">
-    <label  class="col-sm-2 col-form-label">{{form.lastname.label}}</label>
+    <label  class="col-sm-2 col-form-label">{{form.last_name.label}}</label>
     <div class="col-sm-5">
       {{form.last_name}}
     </div>
