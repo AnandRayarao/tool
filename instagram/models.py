@@ -5,8 +5,10 @@ from django.db import models
 class Article(models.Model):
     name = models.CharField(max_length = 80)
     description = models.TextField(max_length = 500)
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    author = models.ForeignKey(User,on_delete=models.CASCADE,
+                               related_name="author")
     likes = models.ManyToManyField(User, related_name="likes")
+
 
 
 

@@ -66,10 +66,25 @@ height: 1000px;">
                         <h5 class="card-title">{{a.name}}</h5>
                         <p class="card-text">{{a.desciption}}</p>
                         <div class="row">
-                        <button type="button" name="Like" class="like col-sm-3 btn btn-sm primary" data-here="likearticle/{{a.id}}"> Like</button>
-                        <div class="articlecount col">
+                        <button type="button" name="Like" class="like col-sm-2 btn primary" data-here="likearticle/{{a.id}}">
+
+                            {% if request.user in a.likes.all %}
+                               Unlike
+                            {% else %}
+                               Like
+                            {% endif %}
+
+                        </button>
+                        <div class="articlecount col-sm-1">
                             {{a.likes.count}}
                         </div>
+                            <div class="col">
+                                {%if user != a.author %}
+                               Written By : <a href =
+                                                       "author/{{a.author.id}}" >{{a.author.email}}</a>
+                                {% endif %}
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -111,8 +126,15 @@ $(".like").click(function(){
         dataType: 'json',
         success: function (data) {
        alert(data)
-        dis.text("unlike")
-        dis.closest('div').find(".articlecount").text(data)
+        if(data.status == "unliked"){
+
+           dis.text("like")
+           }
+        else{
+          dis.text("unlike")
+          }
+
+        dis.closest('div').find(".articlecount").text(data.likes)
         }
       });
 

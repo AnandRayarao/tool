@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container bg-w" >
+<div class=row>
+      <div class="col-sm-4 text-center">
+        <img class="rounded-circle" src="{% static 'images/Anand.PNG' %}" style="border-radius : 50%">
+        <div class="profile-title" >
+         {{author.username}}
+        </div>
+      </div>
+    <div class = col-sm-3 >
+    </div>
+    <div class="col text-center">
+        <h4>Personal Details</h4>
+        <div class = "personaldetails text-center">
+            <div class="title" style="margin-top:15px">
+
+                <h5>Name :  {{author.username}}</h5>
+            </div>
+                   <div class = "personaldetails text-center">
+            <div class="title" style="margin-top:15px">
+
+                <h5>Email :  {{author.email}}</h5>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+     <div class="author_articles">
+        <div class="table">
+
+            {% for article in articles %}
+              <table>
+                  <tr>
+                      <td>
+                         {{article.name}}
+
+                      </td>
+                      <td>
+                          {{article.description}}
+                      </td>
+
+                  </tr>
+
+              </table>
+
+
+            {% endfor %}
+
+
+        </div>
+
+{% endblock %}
