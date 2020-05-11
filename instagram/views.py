@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.db import models
 
@@ -30,7 +31,6 @@ def add_article(request):
             description = str(form['description'].value())
             article = Article(name=name,description = description,author = request.user)
             article.save()
-
             return redirect("/")
 
         return render(request, "add_article.html", {"form": form})
@@ -38,3 +38,10 @@ def add_article(request):
     else:
         form = addArticleForm(request.POST)
         return render(request, "add_article.html", {"form": form})
+
+def like_article(request,id):
+   article = Article.objects.get(pk = id)
+   article.likes.add(request.user.id)
+   print(article.likes.count())
+
+   return HttpResponse(article.likes.count())
