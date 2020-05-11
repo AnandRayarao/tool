@@ -11,17 +11,20 @@ from django.contrib.auth.forms import UserCreationForm, UsernameField
 # Create your views here.
 
 class logiForm(forms.Form):
-        username = forms.CharField(label='username', max_length=100)
-        password = forms.CharField(label="Password",widget=forms.PasswordInput)
+        username = forms.CharField(label='Username', max_length=100,widget=forms.TextInput(attrs={'class':'form-control'}))
+        password = forms.CharField(label="Password", widget=forms.PasswordInput(attrs={'class':'form-control'}))
 
-class MYUserCreationForm(forms.Form):
+class MYUserCreationForm(UserCreationForm):
     firstname = forms.CharField(label='Firstname', max_length=100)
     lastname = forms.CharField(label='Lastname', max_length=100)
-    username = forms.CharField(label='Username', max_length=100)
-    email = forms.CharField(label='Email',widget=forms.EmailInput)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password1 = forms.CharField(label="Conform password",
-                                widget=forms.PasswordInput)
+    email = forms.CharField(label='Email', widget=forms.EmailInput)
+
+    class Meta:
+        model = User
+        fields = ("firstname", "lastname", "email","username",)
+        field_classes = {'username': UsernameField}
+
+
 
 
 def register(request):
@@ -30,15 +33,11 @@ def register(request):
     if request.method == 'POST':
         form = MYUserCreationForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data['username'],
-                                            form.cleaned_data['email'],
-                                            form.cleaned_data['password'])
-            user = User.objects.create_user(form.cleaned_data['username'],
-                                            form.cleaned_data['email'],
-                                            form.cleaned_data['password'])
-            user.save()
+
+            form.save()
 
             return redirect("/user/login")
+        return render(request, 'register.html', {'form': form})
     else:
         form = MYUserCreationForm()
         return render(request, 'register.html', {'form': form})
