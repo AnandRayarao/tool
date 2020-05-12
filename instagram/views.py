@@ -8,7 +8,6 @@ from django.db import models
 
 
 # Create your views here.
-from requests import Response
 
 from instagram.models import Article
 

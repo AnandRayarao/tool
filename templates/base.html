@@ -3,6 +3,8 @@
 {% load static %}
 <html lang="en">
 <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -17,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/index_style.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <meta charset="UTF-8">
     <title>Title</title>
@@ -40,7 +41,7 @@
 </nav>
 
 <!--<a  href = "/user/register"  class="3btn primary sm">hello</a>-->
-
+{% autoescape on %}
 {% block content %}
 <div class="main">
     <div class="row">
@@ -106,6 +107,7 @@ height: 1000px;">
 
         </div>
         {% endblock %}
+{% endautoescape %}
 
 </body>
 </html>
