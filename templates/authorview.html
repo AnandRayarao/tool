@@ -3,102 +3,89 @@
 {% block content %}
 
 
-       <script type="text/javascript">
+<script>
 
-
-             function show_modal(data,id){
-              $('.modal .modal-body').text(data)
-
-              $('#exampleModalLong').modal('show')
-
-
-
-             }
-
-
-         </script>
-<div class="container bg-w" >
-<div class=row>
-      <div class="col-sm-4 text-center">
-        <img class="rounded-circle" src="{% static 'images/Anand.PNG' %}" style="border-radius : 50%">
-        <div class="profile-title" >
-         {{author.username}}
+</script>
+<div class="container bg-w">
+    <div class=row>
+        <div class="col-sm-4 text-center">
+            <img class="rounded-circle" src="{% static 'images/Anand.PNG' %}" style="border-radius : 50%">
+            <div class="profile-title">
+                {{author.username}}
+            </div>
         </div>
-      </div>
-    <div class = col-sm-3 >
-    </div>
-    <div class="col text-center">
-        <h4>Personal Details</h4>
-        <div class = "personaldetails text-center">
-            <div class="title" style="margin-top:15px">
+        <div class=col-sm-3>
+        </div>
+        <div class="col text-center">
+            <h4>Personal Details</h4>
+            <div class="personaldetails text-center">
+                <div class="title" style="margin-top:15px">
 
-                <h5>Name :  {{author.username}}</h5>
+                    <h5>Name : {{author.username}}</h5>
+                </div>
+                <div class="personaldetails text-center">
+                    <div class="title" style="margin-top:15px">
+
+                        <h5>Email : {{author.email}}</h5>
+                    </div>
+
+
+                </div>
+
             </div>
-                   <div class = "personaldetails text-center">
-            <div class="title" style="margin-top:15px">
-
-                <h5>Email :  {{author.email}}</h5>
-            </div>
-
 
 
         </div>
 
-    </div>
-
-
 
     </div>
 
 
-</div>
-
-
-     <div class="author_articles" style="padding-top:30px">
+    <div class="author_articles" style="padding-top:30px">
         <div class="table">
 
 
             <table id="customers">
-              <tr>
-                <th>id</th>
-                <th>Email</th>
+                <tr>
+                    <th>id</th>
+                    <th>Email</th>
 
-              </tr>
-                   {% for article in articles %}
-              <tr>
-                <td>{{article.id}}</td>
-                  <td>
-                      <a href="#" onclick=show_modal('{{article.description}}',"{{article.id}}")>{{article.name}}</a>
-                  </td>
+                </tr>
+                {% for article in articles %}
+                <tr>
+                    <td>{{article.id}}</td>
+                    <td>
+                        <a href="#"  data-description = "{{article.description}}" data-title = "{{article.name}}" class="hello">{{article.name}}</a>
+                    </td>
 
-              </tr>
-              </tr>
-              </tr>
-
-            {% endfor %}
+                </tr>
 
 
-</table>
+                {% endfor %}
+
+
+            </table>
 
 
         </div>
+    </div>
 
 
 
 
+</div>
 
-
-  <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <p>Modal body text goes here.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -107,5 +94,7 @@
   </div>
 </div>
 
-{% endblock %}
+
+
+        {% endblock %}
 
