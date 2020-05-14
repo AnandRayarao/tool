@@ -8,8 +8,9 @@ from django.db import models
 
 
 # Create your views here.
+from django.utils.safestring import mark_safe
 
-from instagram.models import Article
+from instagram.models import Article, ArticleComments
 
 
 class addArticleForm(forms.ModelForm):
@@ -23,8 +24,9 @@ class addArticleForm(forms.ModelForm):
 def index(request):
         articles = Article.objects.all()
         for x in articles:
-            print((x))
-        print(articles, 123455)
+            for  a in x.comments.all():
+                print(a.user.id)
+
         return render(request, "base.html",{"article":articles})
 
 
@@ -64,4 +66,5 @@ def viewauthor(request,id):
     articles = Article.objects.filter(author = user)
 
 
-    return render(request,"authorview.html",{'author':user,"articles":articles})
+    return render(request,"authorview.html",({'author':user,
+                                             "articles":(articles)}))

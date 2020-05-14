@@ -88,7 +88,23 @@
                             </div>
 
                         </div>
+
                     </div>
+                    <div class="card-footer">
+                        <div class="comments" id = "lll">
+                            {% for x in a.comments.all  %}
+                            <div class="row">
+                                {{x.comment}}
+                            </div>
+
+                            {% endfor %}
+                            </div>
+                            <input id = "articlecomment-{{x.id}}" type="text"
+                                   placeholder="comment">
+                            <button class="comment-input" data-id = "articlecomment-{{x.id}}" ></button>
+
+                        </div>
+
                 </div>
                 <br>
                 {% endfor %}
@@ -124,6 +140,16 @@
 
 })
 
+
+$(".comment-input").click(function(){
+debugger
+ var x =  $(this).attr('data-id')
+ var value = document.getElementById(x).value
+ $('<div class="row"></div>').data('num', value).appendTo($(this));
+
+ $(this).closest('div').find('.comments').innerText =  $(this).closest
+ ('div').find('.comments').innerText  +value
+})
 $(".like").click(function(){
   var dis = $(this)
  $.ajax({
