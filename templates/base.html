@@ -61,24 +61,27 @@
                 {%for a in article%}
                 <div class="card" style="background-color: rgba(245, 245, 245, 0.4);">
                     <div class="card-header">
-                        Featured
+                       <h5 class="card-title">{{a.name}}</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{a.name}}</h5>
-                        <p class="card-text">{{a.desciption}}</p>
-                        <div class="row">
-                            <button type="button" name="Like" class="like col-sm-2 btn primary"
-                                    data-here="likearticle/{{a.id}}">
 
-                                {% if request.user in a.likes.all %}
-                                Unlike
-                                {% else %}
-                                Like
-                                {% endif %}
+                        <p class="card-text ">{{a.description|slice:"0:10"}}
+                            .......</p>
+                         <a  href="article/{{a.id}}" style="float:right">View
+                             Full
+                             article</a>
 
-                            </button>
-                            <div class="articlecount col-sm-1">
-                                {{a.likes.count}}
+
+                    </div>
+
+                    <div class="card-footer">
+                         <div class="row">
+
+                            <div class="col-sm-2">
+                                {{a.likes.count}} Likes
+                            </div>
+                              <div class="col-sm-3">
+                                {{a.comments.count}} comments
                             </div>
                             <div class="col">
                                 {%if user != a.author %}
@@ -89,21 +92,9 @@
 
                         </div>
 
+
                     </div>
-                    <div class="card-footer">
-                        <div class="comments" id = "lll">
-                            {% for x in a.comments.all  %}
-                            <div class="row">
-                                {{x.comment}}
-                            </div>
 
-                            {% endfor %}
-                            </div>
-                            <input id = "articlecomment-{{x.id}}" type="text"
-                                   placeholder="comment">
-                            <button class="comment-input" data-id = "articlecomment-{{x.id}}" ></button>
-
-                        </div>
 
                 </div>
                 <br>

@@ -68,3 +68,26 @@ def viewauthor(request,id):
 
     return render(request,"authorview.html",({'author':user,
                                              "articles":(articles)}))
+
+
+class commentForm(forms.Form):
+        comment = forms.CharField(label='comment', max_length=100,
+                                   widget=forms.TextInput(attrs={'class':'form-control'}))
+
+def viewarticle(request,id):
+    form = commentForm()
+    if request.method == 'POST':
+        form = commentForm(request.POST)
+        article = Article.objects.get(pk=id)
+        if form.is_valid():
+          comment = form.cleaned_data['comment']
+          print(request.user.id)
+          article_comment = ArticleComments(comment = comment,
+                                            user=request.user)
+          article_comment.save()
+          article.comments.add(article_comment)
+
+          return redirect('/article/' + id)
+    else:
+        article = Article.objects.get(pk=id)
+        return render(request, "article.html",{'article':article,'form':form})

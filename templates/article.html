@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container" style="background:white">
+    <div class="article-title ">
+        {{article.name}}
+    </div>
+    <div class="article-description">
+          {{article.description}}
+
+    </div>
+
+    <div class="comments">
+      {% for comment in article.comments.all %}
+        <div class="comment">
+         {{comment.comment}}
+            </div>
+        {% endfor %}
+        <form action="" method="POST">
+            {% csrf_token %}
+           {{form.comment}}
+
+        </form>
+
+
+    </div>
+
+
+</div>
+{% endblock %}

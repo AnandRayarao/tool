@@ -1,0 +1,26 @@
+ <div class="card-footer">
+                         <div class="row">
+                            <button type="button" name="Like" class="like col-sm-2 btn primary"
+                                    data-here="likearticle/{{a.id}}">
+
+                                {% if request.user in a.likes.all %}
+                                Unlike
+                                {% else %}
+                                Like
+                                {% endif %}
+
+                            </button>
+                            <div class="articlecount col-sm-1">
+                                {{a.likes.count}}
+                            </div>
+                            <div class="col">
+                                {%if user != a.author %}
+                                Written By : <a href=
+                                                        "author/{{a.author.id}}">{{a.author.email}}</a>
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+
+                    </div>
